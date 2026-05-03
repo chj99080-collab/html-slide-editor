@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editable HTML Slide Sample</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #eef2f7;
+    }
+
+    .slide {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .note {
+      position: absolute;
+      left: 72px;
+      bottom: 40px;
+      color: #64748b;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <section class="slide" id="slide-1" data-title="Editable overview">
+    <div data-editable="true" data-id="hero-title" data-type="text" style="position:absolute;left:82px;top:76px;width:760px;height:74px;font-size:56px;color:#102033;font-weight:800;">Editable HTML Slides</div>
+    <div data-editable="true" data-id="hero-subtitle" data-type="text" style="position:absolute;left:88px;top:166px;width:720px;height:88px;font-size:28px;line-height:1.35;color:#405166;">Constrained metadata makes browser-based visual editing practical.</div>
+    <div data-editable="true" data-id="accent-rect" data-type="rect" style="position:absolute;left:88px;top:288px;width:340px;height:152px;background-color:#d8ecf6;border:3px solid #2f6f91;border-radius:6px;"></div>
+    <div data-editable="true" data-id="accent-circle" data-type="ellipse" style="position:absolute;left:482px;top:292px;width:154px;height:154px;background-color:#f6dfb7;border:3px solid #a66c2c;border-radius:999px;"></div>
+    <div data-editable="true" data-id="connector-line" data-type="line" style="position:absolute;left:666px;top:368px;width:360px;height:6px;background-color:#315f7d;"></div>
+    <div class="note">This note is unsupported content and should be preserved on save.</div>
+  </section>
+
+  <section class="slide" id="slide-2" data-title="Editable content">
+    <div data-editable="true" data-id="slide2-title" data-type="text" style="position:absolute;left:76px;top:64px;width:680px;height:66px;font-size:48px;color:#172033;font-weight:800;">Metadata Contract</div>
+    <div data-editable="true" data-id="bullet-1" data-type="text" style="position:absolute;left:112px;top:176px;width:850px;height:44px;font-size:28px;color:#263447;">data-editable marks safe editing targets.</div>
+    <div data-editable="true" data-id="bullet-2" data-type="text" style="position:absolute;left:112px;top:248px;width:850px;height:44px;font-size:28px;color:#263447;">data-id provides a stable save target.</div>
+    <div data-editable="true" data-id="bullet-3" data-type="text" style="position:absolute;left:112px;top:320px;width:850px;height:44px;font-size:28px;color:#263447;">Inline absolute styles define geometry.</div>
+    <img data-editable="true" data-id="sample-image" data-type="image" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=520&q=80" alt="" style="position:absolute;left:828px;top:114px;width:330px;height:230px;object-fit:cover;border-radius:6px;" />
+    <div data-editable="true" data-id="footer-bar" data-type="rect" style="position:absolute;left:76px;top:596px;width:1080px;height:46px;background-color:#17364f;"></div>
+  </section>
+</body>
+</html>

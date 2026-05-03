@@ -29,10 +29,16 @@ button {
 }
 
 .app-shell {
+  position: relative;
   display: grid;
   grid-template-rows: 64px 1fr;
   min-height: 100vh;
   background: #e8edf5;
+}
+
+.app-shell.drop-active {
+  outline: 4px solid #2d6f9f;
+  outline-offset: -4px;
 }
 
 .toolbar {
@@ -301,6 +307,29 @@ button {
 
 .hidden-input {
   display: none;
+}
+
+.drop-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  color: #113047;
+  background: rgba(229, 239, 248, 0.86);
+  border: 4px solid #2d6f9f;
+  text-align: center;
+  pointer-events: none;
+}
+
+.drop-overlay strong {
+  font-size: 24px;
+}
+
+.drop-overlay span {
+  color: #405066;
 }
 
 @media (max-width: 1040px) {

@@ -8,6 +8,7 @@ import {
   Save,
   Square,
   Type,
+  Upload,
   ZoomIn,
   ZoomOut,
 } from "lucide-react";
@@ -41,6 +42,7 @@ export function App() {
   const [selectedId, setSelectedId] = useState<string | null>("title");
   const [zoom, setZoom] = useState(0.62);
   const [status, setStatus] = useState("Ready");
+  const [isDropActive, setIsDropActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const deck: DeckState = useMemo(() => parseDeck(html), [html]);
@@ -74,6 +76,17 @@ export function App() {
     setActiveSlide(0);
     setSelectedId(parseDeck(text).editables[0]?.id || null);
     setStatus(`Opened ${file.name}`);
+  }
+
+  async function loadDroppedFile(file: File) {
+    if (!isHtmlFile(file)) {
+      setStatus("Drop an .html or .htm slide deck");
+      return;
+    }
+
+    await loadFile(file);
+    setFileHandle(null);
+    setStatus(`Dropped ${file.name}; Save will download`);
   }
 
   async function loadSample() {
@@ -118,7 +131,30 @@ export function App() {
   }
 
   return (
-    <div className="app-shell">
+    <div
+      className={`app-shell ${isDropActive ? "drop-active" : ""}`}
+      onDragEnter={(event) => {
+        event.preventDefault();
+        setIsDropActive(true);
+      }}
+      onDragOver={(event) => {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = "copy";
+      }}
+      onDragLeave={(event) => {
+        if (event.currentTarget === event.target) {
+          setIsDropActive(false);
+        }
+      }}
+      onDrop={(event) => {
+        event.preventDefault();
+        setIsDropActive(false);
+        const file = event.dataTransfer.files[0];
+        if (file) {
+          void loadDroppedFile(file);
+        }
+      }}
+    >
       <input
         ref={fileInputRef}
         className="hidden-input"
@@ -203,8 +239,20 @@ export function App() {
           }}
         />
       </main>
+      {isDropActive ? (
+        <div className="drop-overlay">
+          <Upload size={34} />
+          <strong>Drop HTML slide deck</strong>
+          <span>Drop an .html or .htm file to load it for editing.</span>
+        </div>
+      ) : null}
     </div>
   );
+}
+
+function isHtmlFile(file: File): boolean {
+  const name = file.name.toLowerCase();
+  return file.type === "text/html" || name.endsWith(".html") || name.endsWith(".htm");
 }
 
 function SlideList({

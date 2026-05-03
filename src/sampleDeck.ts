@@ -1,1 +1,1 @@
-export const SAMPLE_DECK_PATH = "/samples/editable-deck.html";
+export const SAMPLE_DECK_PATH = `${import.meta.env.BASE_URL}samples/editable-deck.html`;
